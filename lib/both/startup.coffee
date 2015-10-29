@@ -36,7 +36,7 @@ adminCreateTables = (collections) ->
 	_.each AdminConfig?.collections, (collection, name) ->
 		_.defaults collection, {
 			showEditColumn: true
-			showDelColumn: true
+			showDelColumn: false
 		}
 
 		columns = _.map collection.tableColumns, (column) ->
