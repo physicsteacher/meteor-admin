@@ -6,7 +6,7 @@ adminEditButton = {
 	data: '_id'
 	title: 'Edit'
 	createdCell: (node, cellData, rowData) ->
-		$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData}, node)
+		$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData})
 	width: '40px'
 	orderable: false
 }
@@ -14,7 +14,7 @@ adminDelButton = {
 	data: '_id'
 	title: 'Delete'
 	createdCell: (node, cellData, rowData) ->
-		$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData}, node)
+		$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData})
 	width: '40px'
 	orderable: false
 }
@@ -36,14 +36,14 @@ adminCreateTables = (collections) ->
 	_.each AdminConfig?.collections, (collection, name) ->
 		_.defaults collection, {
 			showEditColumn: true
-			showDelColumn: false
+			showDelColumn: true
 		}
 
 		columns = _.map collection.tableColumns, (column) ->
 			if column.template
 				createdCell = (node, cellData, rowData) ->
 					$(node).html ''
-					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData}, node)
+					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData})
 
 			data: column.name
 			title: column.label
@@ -185,7 +185,7 @@ Meteor.startup ->
 				title: 'Admin'
 				# TODO: use `tmpl`
 				createdCell: (node, cellData, rowData) ->
-					$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData}, node)
+					$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData})
 				width: '40px'
 			}
 			{
@@ -200,7 +200,7 @@ Meteor.startup ->
 				title: 'Mail'
 				# TODO: use `tmpl`
 				createdCell: (node, cellData, rowData) ->
-					$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData}, node)
+					$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData})
 				width: '40px'
 			}
 			{ data: 'createdAt', title: 'Joined' }
